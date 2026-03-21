@@ -1,0 +1,1 @@
+String initLottie = "assets/lotties/init.json";
