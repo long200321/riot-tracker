@@ -4,10 +4,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class ApiClient {
   late final Dio dio;
 
-  ApiClient() {
+  ApiClient({required String baseUrl}) {
     dio = Dio(
       BaseOptions(
-        baseUrl: dotenv.env['BASE_URL'] ?? '',
+        baseUrl: baseUrl,
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
       ),
