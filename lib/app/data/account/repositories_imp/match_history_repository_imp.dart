@@ -15,4 +15,10 @@ class MatchHistoryRepositoryImp implements MatchHistoryRepository {
     final response = await matchHistoryService.getListMatchHistory(request);
     return response?.toEntity();
   }
+
+  @override
+  Future<Match?> getMatch(GetMatchHistoryRequest request) async {
+    final response = await matchHistoryService.getMatch(request);
+    return response?.toEntity();
+  }
 }

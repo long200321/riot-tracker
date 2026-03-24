@@ -16,4 +16,13 @@ class GetMatchHistoryService {
       return null;
     }
   }
+
+  Future<MatchResponse?> getMatch(GetMatchHistoryRequest request) async {
+    try {
+      final response = await _dio.get(request.toMatch());
+      return MatchResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      return null;
+    }
+  }
 }

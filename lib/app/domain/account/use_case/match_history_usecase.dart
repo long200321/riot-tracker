@@ -10,4 +10,8 @@ class MatchHistoryUsecase {
   Future<MatchHistory?> getListMatch(GetMatchHistoryRequest request) {
     return repository.getListMatch(request);
   }
+
+  Future<Match?> getMatch(GetMatchHistoryRequest request) {
+    return repository.getMatch(request);
+  }
 }

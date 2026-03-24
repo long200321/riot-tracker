@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:riot_tracker/app/bindings/account_binding.dart';
@@ -10,7 +11,12 @@ import 'app/core/constants/color_constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp
+  ]);
+
   runApp(AppBackground(child: MyApp()));
+
   await dotenv.load(fileName: ".env");
 }
 

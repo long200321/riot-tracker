@@ -22,6 +22,7 @@ class TextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
+      overflow: TextOverflow.ellipsis,
       text,
       maxLines: 1,
       softWrap: true,

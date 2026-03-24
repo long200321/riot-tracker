@@ -3,4 +3,5 @@ import 'package:riot_tracker/app/domain/account/entities/match_history.dart';
 
 abstract class MatchHistoryRepository {
   Future<MatchHistory?> getListMatch(GetMatchHistoryRequest request);
+  Future<Match?> getMatch(GetMatchHistoryRequest request);
 }
