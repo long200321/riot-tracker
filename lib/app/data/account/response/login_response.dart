@@ -1,5 +1,5 @@
 class LoginResponse {
-  final String? puuid;
+  final String puuid;
 
   LoginResponse({
     required this.puuid,
@@ -7,8 +7,8 @@ class LoginResponse {
     required this.tagLine,
   });
 
-  final String? gameName;
-  final String? tagLine;
+  final String gameName;
+  final String tagLine;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(

@@ -1,1 +1,1 @@
-String initLottie = "assets/lotties/init.json";
+const String initLottie = "assets/lotties/init.json";
