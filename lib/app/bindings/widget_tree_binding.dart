@@ -16,6 +16,5 @@ class WidgetTreeViewBinding extends Bindings{
       ),
       fenix: true,
     );
-
   }
 }

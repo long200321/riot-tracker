@@ -9,14 +9,18 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final padding = (width * 0.4).clamp(12.0, 24.0);
+    final radius = (width * 0.03).clamp(10.0, 20.0);
     return Container(
+      width: width,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: BorderRadius.circular(radius),
         color: color,
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
-        child: child
+        padding: EdgeInsets.all(padding),
+        child: child,
       ),
     );
   }

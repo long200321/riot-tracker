@@ -4,6 +4,7 @@ import 'package:riot_tracker/app/ui/views/init/init_view.dart';
 import 'package:riot_tracker/app/ui/views/setting/setting_view.dart';
 import 'package:riot_tracker/app/ui/views/splash/splash_view.dart';
 import 'package:riot_tracker/app/ui/views/widget_tree/widget_tree_view.dart';
+
 import '../../bindings/widget_tree_binding.dart';
 import '../../ui/views/collection/collection_view.dart';
 import '../../ui/views/profile/profile_view.dart';

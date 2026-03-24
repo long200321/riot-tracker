@@ -39,16 +39,16 @@ class Rank {
   final String? tier;
   final String? rank;
   final int? leaguePoints;
-  final int? wins;
-  final int? losses;
+  final int wins;
+  final int losses;
 
   Rank({
     this.queueType = QueueType.unknown,
     this.tier,
     this.rank,
     this.leaguePoints,
-    this.wins,
-    this.losses,
+    this.wins =0,
+    this.losses=0,
   });
 
   String? get queueDisplayName => queueType?.displayName;
