@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:riot_tracker/app/core/constants/assets_constant.dart';
@@ -33,14 +34,17 @@ class InitView extends GetView<InitViewController> {
                       height20,
                       TextFormFieldWidget(
                         controller: controller.gameNameController,
-                        hintText: "Tên Ingame",
-                        validMessage: "Vui lòng nhập ingame",
+                        hintText: "Ingame",
+                        validMessage: "Ingame is empty",
                       ),
                       height10,
                       TextFormFieldWidget(
                         controller: controller.tagLineController,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                        ],
                         hintText: "Tag ID",
-                        validMessage: "Vui lòng nhập tag id",
+                        validMessage: "TagID is empty",
                       ),
                       height10,
                       Obx(() => Text(controller.error.value)),

@@ -19,11 +19,12 @@ class AccountUsecase {
     final login = await repository.getUser(LoginRequest(puuid: puuid));
     final summoner = await repository.getSummoner(GetSummonerRequest(puuid: puuid));
     final ranks = await repository.getSummonerRank(GetSummonerRequest(puuid: puuid));
+    final championMastery = await repository.getChampionMastery(GetSummonerRequest(puuid: puuid));
 
     if (login == null) return null;
 
     var account = login.merge(summoner ?? Account());
-    account = account.copyWith(ranks: ranks);
+    account = account.copyWith(ranks: ranks, championMastery: championMastery);
 
     return account;
   }

@@ -10,4 +10,8 @@ class GetSummonerRequest {
   String toGetRankPath() {
     return "/lol/league/v4/entries/by-puuid/$puuid";
   }
+
+  String toChampionMasteryPath() {
+    return "/lol/champion-mastery/v4/champion-masteries/by-puuid/$puuid/top";
+  }
 }

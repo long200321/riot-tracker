@@ -2,6 +2,7 @@ import 'package:riot_tracker/app/data/account/response/get_summoner_response.dar
 import 'package:riot_tracker/app/data/account/response/login_response.dart';
 import 'package:riot_tracker/app/domain/account/entities/account.dart';
 
+import '../response/champion_mastery_response.dart';
 import '../response/get_summoner_rank_response.dart';
 
 extension AccountMapper on LoginResponse {
@@ -45,6 +46,19 @@ extension AccountMerge on Account {
       profileIconId: profileIconId ?? other.profileIconId,
       summonerLevel: summonerLevel ?? other.summonerLevel,
       ranks: ranks ?? other.ranks
+    );
+  }
+}
+
+extension ChampionMasteryMapper on ChampionMasteryResponse {
+  ChampionMastery toEntity() {
+    return ChampionMastery(
+      championId: championId,
+      championName: championName,
+      championLevel: championLevel,
+      championPoints: championPoints,
+      championPointsSinceLastLevel: championPointsSinceLastLevel,
+      championPointsUntilNextLevel: championPointsUntilNextLevel,
     );
   }
 }

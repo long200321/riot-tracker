@@ -47,4 +47,13 @@ class AccountRepositoryImpl implements AccountRepository {
     return [];
   }
 
+  @override
+  Future<List<ChampionMastery>> getChampionMastery(GetSummonerRequest request) async {
+    final responses = await summonerService.getChampionMastery(request);
+    if (responses != null) {
+      return responses.map((e) => e.toEntity()).toList();
+    }
+    return [];
+  }
+
 }
