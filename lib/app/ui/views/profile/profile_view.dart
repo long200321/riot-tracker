@@ -1,19 +1,24 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:riot_tracker/app/core/constants/assets_constant.dart';
 import 'package:riot_tracker/app/core/constants/size_constant.dart';
 import 'package:riot_tracker/app/domain/account/entities/match_history.dart';
 import 'package:riot_tracker/app/ui/views/profile/profile_view_controller.dart';
-import 'package:riot_tracker/app/ui/views/widget_tree/card_widget.dart';
+import 'package:riot_tracker/app/ui/widgets/card_widget.dart';
+import 'package:riot_tracker/app/ui/widgets/elevated_button_widget.dart';
+import 'package:riot_tracker/app/ui/widgets/image_network_widget.dart';
 import 'package:riot_tracker/app/ui/widgets/text_widget.dart';
 
 import '../../../core/constants/color_constants.dart';
 import '../widget_tree/widget_tree_view_controller.dart';
 
 class ProfileView extends GetView<ProfileViewController> {
-  ProfileView({super.key});
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +44,7 @@ class ProfileView extends GetView<ProfileViewController> {
                         ),
                       ),
                       CardWidget(child: _buildWinrateWidget(accountController)),
+                      CardWidget(child: _buildMasteryWidget(accountController)),
                     ],
                   ),
                 ),
@@ -46,6 +52,75 @@ class ProfileView extends GetView<ProfileViewController> {
             );
       }),
     );
+  }
+
+  Widget _buildMasteryWidget(WidgetTreeViewController accountController) {
+    final championImage = dotenv.env["CHAMPION_MASTERY"];
+    final masteryList = accountController.account.value?.championMastery ?? [];
+
+    return masteryList.isEmpty
+        ? _buildNoDataWidget("No mastery champion")
+        : Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextWidget(text: "Mastery", size: AppTextSize.body_large),
+                TextButton(onPressed: () {}, child: Text("View all")),
+              ],
+            ),
+            CarouselSlider.builder(
+              itemCount: masteryList.length,
+              itemBuilder: (context, index, realIndex) {
+                final mastery = masteryList[index];
+                return Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: CachedNetworkImage(
+                        height: 300,
+                        width: 200,
+                        imageUrl: '$championImage/${mastery.championName}_0.jpg',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextWidget(text: mastery.championName,
+                          size: AppTextSize.body_medium,
+                            color: AppColors.white,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 5,
+                            child: Divider(),
+                          ),
+                          Text("Mastery",style: TextStyle(
+                            color: AppColors.white,
+                            fontSize: AppTextSize.body_small.value
+                          ),),
+                          Text("${mastery.championLevel}",style: TextStyle(
+                              color: AppColors.yellow,
+                              fontSize: AppTextSize.body_large.value,
+                            fontStyle: FontStyle.italic
+                          ),),
+                        ],
+                      ),
+                    )
+                  ],
+                );
+              },
+              options: CarouselOptions(
+                height: 300,
+                viewportFraction: 0.6,
+                enlargeCenterPage: true,
+              ),
+            ),
+          ],
+        );
   }
 
   Widget _buildWinrateWidget(WidgetTreeViewController accountController) {
@@ -59,7 +134,7 @@ class ProfileView extends GetView<ProfileViewController> {
     }
 
     return controller.listMatch.isEmpty && controller.hasMore.value
-        ? Center(child: CircularProgressIndicator())
+        ? LottieBuilder.asset(loadingLottie)
         : Row(
           spacing: 10,
           children: [
@@ -91,16 +166,9 @@ class ProfileView extends GetView<ProfileViewController> {
                   backgroundColor: Colors.grey.shade300,
                   circularStrokeCap: CircularStrokeCap.round,
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.red,
-                  ),
-                  child: TextWidget(
-                    text: "View Detail",
-                    color: AppColors.white,
-                  ),
-                ),
+                ElevatedButtonWidget(text: "View Detail", onPressesd: () {
+
+                })
               ],
             ),
             _buildListMatchWidget(accountController),
@@ -154,40 +222,28 @@ class ProfileView extends GetView<ProfileViewController> {
       spacing: 5,
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 10),
           child: Column(
-            spacing: 2,
             children: [
-              Image.network(
-                "$championIcon/${participant.championName}.png",
-                width: 40,
-                height: 40,
-                loadingBuilder: (context, child, progress) {
-                  if (progress == null) return child;
-                  return SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: Center(
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    ),
-                  );
-                },
+              ImageNetworkWidget(
+                imageUrl: "$championIcon/${participant.championName}.png",
+                size: 40,
               ),
               _buildSpellWidget(participant),
             ],
           ),
         ),
+
         Expanded(
           child: Column(
+            spacing: 4,
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
-                "${participant.kills}/ ${participant.deaths}/ ${participant.assists}",
-                style: TextStyle(
-                  fontSize: AppTextSize.body_medium.value
-                ),
+                "${participant.kills}/${participant.deaths}/${participant.assists}",
+                style: TextStyle(fontSize: AppTextSize.body_medium.value),
               ),
+
               SizedBox(
                 height: 30,
                 child: ListView.builder(
@@ -195,15 +251,16 @@ class ProfileView extends GetView<ProfileViewController> {
                   itemCount: participant.items.length,
                   itemBuilder: (context, index) {
                     final image = participant.items[index];
+
+                    if (image == 0) {
+                      return const SizedBox(width: 30);
+                    }
+
                     return Padding(
-                      padding: EdgeInsets.only(right: 5),
-                      child: SizedBox(
-                        width: 30,
-                        height: 30,
-                        child:
-                            image == 0
-                                ? null
-                                : Image.network("$itemIcon/$image.png"),
+                      padding: const EdgeInsets.only(right: 5),
+                      child: ImageNetworkWidget(
+                        imageUrl: "$itemIcon/$image.png",
+                        size: 30,
                       ),
                     );
                   },

@@ -5,6 +5,7 @@ class Account {
   final int? profileIconId;
   final int? summonerLevel;
   final List<Rank>? ranks;
+  final List<ChampionMastery>? championMastery;
 
   Account({
     this.puuid,
@@ -12,7 +13,8 @@ class Account {
     this.tagLine,
     this.profileIconId,
     this.summonerLevel,
-    this.ranks
+    this.ranks,
+    this.championMastery,
   });
 
   Account copyWith({
@@ -22,6 +24,7 @@ class Account {
     int? profileIconId,
     int? summonerLevel,
     List<Rank>? ranks,
+    List<ChampionMastery>? championMastery,
   }) {
     return Account(
       puuid: puuid ?? this.puuid,
@@ -30,6 +33,7 @@ class Account {
       profileIconId: profileIconId ?? this.profileIconId,
       summonerLevel: summonerLevel ?? this.summonerLevel,
       ranks: ranks ?? this.ranks,
+      championMastery: championMastery ?? this.championMastery,
     );
   }
 }
@@ -81,9 +85,27 @@ extension QueueTypeExtension on QueueType {
         return "FLEX 5V5";
       case QueueType.unknown:
       default:
-        return "Không xác định";
+        return "Unknown";
     }
   }
+}
+
+class ChampionMastery {
+  final int championId;
+  final String championName;
+  final int championLevel;
+  final int championPoints;
+  final int championPointsSinceLastLevel;
+  final int championPointsUntilNextLevel;
+
+  ChampionMastery({
+    required this.championId,
+    required this.championName,
+    required this.championLevel,
+    required this.championPoints,
+    required this.championPointsSinceLastLevel,
+    required this.championPointsUntilNextLevel,
+  });
 }
 
 

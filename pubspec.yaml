@@ -41,6 +41,7 @@ dependencies:
   get: ^4.7.3
   carousel_slider: ^5.1.2
   percent_indicator: ^4.2.5
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +72,7 @@ flutter:
   assets:
     - assets/images/
     - assets/lotties/
+    - assets/champion/
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

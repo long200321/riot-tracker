@@ -8,4 +8,5 @@ abstract class AccountRepository {
   Future<Account?> getUser(LoginRequest request);
   Future<Account?> getSummoner(GetSummonerRequest request);
   Future<List<Rank>> getSummonerRank(GetSummonerRequest request);
+  Future<List<ChampionMastery>> getChampionMastery(GetSummonerRequest request);
 }
