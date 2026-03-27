@@ -5,8 +5,8 @@ import 'package:lottie/lottie.dart';
 import 'package:riot_tracker/app/core/constants/assets_constant.dart';
 import 'package:riot_tracker/app/core/constants/color_constants.dart';
 import 'package:riot_tracker/app/core/constants/size_constant.dart';
-import 'package:riot_tracker/app/ui/widgets/text_widget.dart';
 import '../../widgets/text_form_field_widget.dart';
+import '../../widgets/text_widget.dart';
 import 'init_controller.dart';
 
 class InitView extends GetView<InitViewController> {
