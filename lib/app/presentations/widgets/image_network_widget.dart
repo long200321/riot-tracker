@@ -21,8 +21,10 @@ class ImageNetworkWidget extends StatelessWidget {
         child: CircularProgressIndicator(strokeWidth: 2),
       ),
 
-      errorWidget: (_, __, ___) =>
-      Icon(Icons.image_not_supported, size: size),
+      errorWidget: (_, __, ___)
+      {
+
+        return Icon(Icons.image_not_supported, size: size);}
     );
   }
 }
