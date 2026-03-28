@@ -19,9 +19,10 @@ class ChampionView extends GetView<ChampionController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return controller.isLoading.value ? LoadingWidget() :
-          Scaffold(
-            body:  GridView.builder(
+      return controller.isLoading.value
+          ? LoadingWidget()
+          : Scaffold(
+            body: GridView.builder(
               padding: const EdgeInsets.all(12),
               itemCount: controller.champions.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -45,14 +46,19 @@ class ChampionView extends GetView<ChampionController> {
         fit: StackFit.expand,
         children: [
           CachedNetworkImage(
-            imageUrl: "$champImage/centered/${champ.id}_0.jpg",
+            imageUrl:
+                champ.id == "Fiddlesticks"
+                    ? "$champImage/centered/FiddleSticks_0.jpg"
+                    : "$champImage/centered/${champ.id}_0.jpg",
             fit: BoxFit.cover,
             placeholder:
                 (context, url) =>
                     const Center(child: CircularProgressIndicator()),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+            errorWidget: (context, url, error) {
+              return const Icon(Icons.error);
+            },
           ),
-      
+
           Positioned(
             bottom: 8,
             left: 8,
@@ -79,7 +85,7 @@ class ChampionView extends GetView<ChampionController> {
       ),
       onTap: () {
         Get.toNamed(AppRoutes.championDetail, arguments: champ);
-      }
+      },
     );
   }
 }

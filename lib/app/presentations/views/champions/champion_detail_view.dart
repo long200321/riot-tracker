@@ -176,7 +176,7 @@ class ChampionDetailView extends GetView<ChampionDetailViewController> {
               return ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: CachedNetworkImage(
-                  imageUrl: "$champImage/splash/${champ.id}_${skin.num}.jpg",
+                  imageUrl: champ.id == "Fiddlesticks" ? "$champImage/splash/FiddleSticks_${skin.num}.jpg" : "$champImage/splash/${champ.id}_${skin.num}.jpg",
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
@@ -200,7 +200,7 @@ class ChampionDetailView extends GetView<ChampionDetailViewController> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: CachedNetworkImage(
-        imageUrl: "$champImage/splash/${champ.id}_${selectedSkin.num}.jpg",
+        imageUrl: champ.id == "Fiddlesticks" ? "$champImage/splash/FiddleSticks_${selectedSkin.num}.jpg" : "$champImage/splash/${champ.id}_${selectedSkin.num}.jpg",
         height: 250,
         width: double.infinity,
         fit: BoxFit.cover,

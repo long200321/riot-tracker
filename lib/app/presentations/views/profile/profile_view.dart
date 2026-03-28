@@ -80,7 +80,7 @@ class ProfileView extends GetView<ProfileViewController> {
                       child: CachedNetworkImage(
                         height: 300,
                         width: 200,
-                        imageUrl: '$championImage/centered/${mastery.championName}_0.jpg',
+                        imageUrl: mastery.championName == "Fiddlesticks" ? '$championImage/centered/FiddleSticks_0.jpg' : '$championImage/centered/${mastery.championName}_0.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -225,7 +225,7 @@ class ProfileView extends GetView<ProfileViewController> {
           child: Column(
             children: [
               ImageNetworkWidget(
-                imageUrl: "$championIcon/${participant.championName}.png",
+                imageUrl: participant.championName == "Fiddlesticks" ? "$championIcon/FiddleSticks.png" : "$championIcon/${participant.championName}.png",
                 size: 40,
               ),
               _buildSpellWidget(participant),
