@@ -37,8 +37,8 @@ A Flutter mobile application that allows users to track their Riot Games account
 
 ## 📸 Screenshots
 
-![Home](./screenshots/home1.png)
 ![Home](./screenshots/home2.png)
+![Home](./screenshots/home1.png)
 
 ![Match History](./screenshots/champion_list.png)
 ![Match History](./screenshots/champion_detail.png)
