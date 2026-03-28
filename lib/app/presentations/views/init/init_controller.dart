@@ -5,9 +5,6 @@ import 'package:riot_tracker/app/core/routes/app_routes.dart';
 import 'package:riot_tracker/app/core/storage/user_storage.dart';
 import 'package:riot_tracker/app/data/account/request/login_request.dart';
 import 'package:riot_tracker/app/domain/account/use_case/account_usecase.dart';
-import 'package:riot_tracker/app/ui/views/widget_tree/widget_tree_view.dart';
-
-import '../../../domain/account/entities/account.dart';
 
 class InitViewController extends GetxController {
   final AccountUsecase useCase;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riot_tracker/app/ui/widgets/text_widget.dart';
+import 'package:riot_tracker/app/presentations/widgets/text_widget.dart';
 
 import '../../core/constants/color_constants.dart';
 

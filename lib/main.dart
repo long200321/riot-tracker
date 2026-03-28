@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:riot_tracker/app/bindings/account_binding.dart';
 import 'package:riot_tracker/app/core/routes/app_pages.dart';
 import 'package:riot_tracker/app/core/storage/user_storage.dart';
-import 'package:riot_tracker/app/ui/widgets/app_background_widget.dart';
 
 import 'app/core/constants/color_constants.dart';
+import 'app/presentations/widgets/app_background_widget.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

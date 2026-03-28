@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:riot_tracker/app/core/routes/app_routes.dart';
 import 'package:riot_tracker/app/core/storage/user_storage.dart';
-import 'package:riot_tracker/app/ui/widgets/elevated_button_widget.dart';
+import '../../widgets/elevated_button_widget.dart';
 
 class SettingView extends StatelessWidget {
   const SettingView({super.key});

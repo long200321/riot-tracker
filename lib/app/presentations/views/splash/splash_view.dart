@@ -5,7 +5,7 @@ import 'package:riot_tracker/app/core/constants/assets_constant.dart';
 import 'package:riot_tracker/app/core/constants/color_constants.dart';
 import 'package:riot_tracker/app/core/constants/size_constant.dart';
 import 'package:riot_tracker/app/core/storage/user_storage.dart';
-import 'package:riot_tracker/app/ui/views/splash/splash_view_controller.dart';
+import 'package:riot_tracker/app/presentations/views/splash/splash_view_controller.dart';
 
 class SplashView extends GetView<SplashViewController> {
   const SplashView({super.key});

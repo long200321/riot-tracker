@@ -8,13 +8,12 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:riot_tracker/app/core/constants/assets_constant.dart';
 import 'package:riot_tracker/app/core/constants/size_constant.dart';
 import 'package:riot_tracker/app/domain/account/entities/match_history.dart';
-import 'package:riot_tracker/app/ui/views/profile/profile_view_controller.dart';
-import 'package:riot_tracker/app/ui/widgets/card_widget.dart';
-import 'package:riot_tracker/app/ui/widgets/elevated_button_widget.dart';
-import 'package:riot_tracker/app/ui/widgets/image_network_widget.dart';
-import 'package:riot_tracker/app/ui/widgets/text_widget.dart';
-
+import 'package:riot_tracker/app/presentations/views/profile/profile_view_controller.dart';
 import '../../../core/constants/color_constants.dart';
+import '../../widgets/card_widget.dart';
+import '../../widgets/elevated_button_widget.dart';
+import '../../widgets/image_network_widget.dart';
+import '../../widgets/text_widget.dart';
 import '../widget_tree/widget_tree_view_controller.dart';
 
 class ProfileView extends GetView<ProfileViewController> {
@@ -55,7 +54,7 @@ class ProfileView extends GetView<ProfileViewController> {
   }
 
   Widget _buildMasteryWidget(WidgetTreeViewController accountController) {
-    final championImage = dotenv.env["CHAMPION_MASTERY"];
+    final championImage = dotenv.env["CHAMPION_IMG_URL"];
     final masteryList = accountController.account.value?.championMastery ?? [];
 
     return masteryList.isEmpty
@@ -81,7 +80,7 @@ class ProfileView extends GetView<ProfileViewController> {
                       child: CachedNetworkImage(
                         height: 300,
                         width: 200,
-                        imageUrl: '$championImage/${mastery.championName}_0.jpg',
+                        imageUrl: mastery.championName == "Fiddlesticks" ? '$championImage/centered/FiddleSticks_0.jpg' : '$championImage/centered/${mastery.championName}_0.jpg',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -224,9 +223,10 @@ class ProfileView extends GetView<ProfileViewController> {
         Padding(
           padding: const EdgeInsets.only(top: 10),
           child: Column(
+            spacing: 2,
             children: [
               ImageNetworkWidget(
-                imageUrl: "$championIcon/${participant.championName}.png",
+                imageUrl: participant.championName == "Fiddlesticks" ? "$championIcon/FiddleSticks.png" : "$championIcon/${participant.championName}.png",
                 size: 40,
               ),
               _buildSpellWidget(participant),
@@ -278,31 +278,14 @@ class ProfileView extends GetView<ProfileViewController> {
     return Row(
       spacing: 2,
       children: [
-        Image.network(
-          "$spellIcon/${participant.summonerSpell1Name}.png",
-          width: 20,
-          height: 30,
-          loadingBuilder: (context, child, progress) {
-            if (progress == null) return child;
-            return SizedBox(
-              width: 20,
-              height: 30,
-              child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
-            );
-          },
+        ImageNetworkWidget(
+          imageUrl: "$spellIcon/${participant.summonerSpell1Name}.png",
+          size: 20,
         ),
-        Image.network(
-          "https://ddragon.leagueoflegends.com/cdn/16.6.1/img/spell/${participant.summonerSpell2Name}.png",
-          width: 20,
-          height: 20,
-          loadingBuilder: (context, child, progress) {
-            if (progress == null) return child;
-            return SizedBox(
-              width: 20,
-              height: 20,
-              child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
-            );
-          },
+
+        ImageNetworkWidget(
+          imageUrl: "$spellIcon/${participant.summonerSpell2Name}.png",
+          size: 20,
         ),
       ],
     );

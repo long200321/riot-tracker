@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:riot_tracker/app/core/constants/color_constants.dart';
 import 'package:riot_tracker/app/core/constants/size_constant.dart';
-import 'package:riot_tracker/app/ui/views/champions/champion_view.dart';
-import 'package:riot_tracker/app/ui/views/setting/setting_view.dart';
-import 'package:riot_tracker/app/ui/views/widget_tree/widget_tree_view_controller.dart';
-import 'package:riot_tracker/app/ui/widgets/text_widget.dart';
-
+import 'package:riot_tracker/app/presentations/views/widget_tree/widget_tree_view_controller.dart';
+import '../../widgets/text_widget.dart';
+import '../champions/champion_view.dart';
 import '../profile/profile_view.dart';
+import '../setting/setting_view.dart';
 
 class WidgetTreeView extends GetView<WidgetTreeViewController> {
   WidgetTreeView({super.key});
