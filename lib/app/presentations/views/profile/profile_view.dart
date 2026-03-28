@@ -223,6 +223,7 @@ class ProfileView extends GetView<ProfileViewController> {
         Padding(
           padding: const EdgeInsets.only(top: 10),
           child: Column(
+            spacing: 2,
             children: [
               ImageNetworkWidget(
                 imageUrl: participant.championName == "Fiddlesticks" ? "$championIcon/FiddleSticks.png" : "$championIcon/${participant.championName}.png",
@@ -277,31 +278,14 @@ class ProfileView extends GetView<ProfileViewController> {
     return Row(
       spacing: 2,
       children: [
-        Image.network(
-          "$spellIcon/${participant.summonerSpell1Name}.png",
-          width: 20,
-          height: 30,
-          loadingBuilder: (context, child, progress) {
-            if (progress == null) return child;
-            return SizedBox(
-              width: 20,
-              height: 30,
-              child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
-            );
-          },
+        ImageNetworkWidget(
+          imageUrl: "$spellIcon/${participant.summonerSpell1Name}.png",
+          size: 20,
         ),
-        Image.network(
-          "$spellIcon/${participant.summonerSpell2Name}.png",
-          width: 20,
-          height: 20,
-          loadingBuilder: (context, child, progress) {
-            if (progress == null) return child;
-            return SizedBox(
-              width: 20,
-              height: 20,
-              child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
-            );
-          },
+
+        ImageNetworkWidget(
+          imageUrl: "$spellIcon/${participant.summonerSpell2Name}.png",
+          size: 20,
         ),
       ],
     );
